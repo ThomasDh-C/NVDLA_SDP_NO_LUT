@@ -2,7 +2,8 @@
 cmake_minimum_required(VERSION 3.14.0)
 project(sdp LANGUAGES CXX)
 
-option(ILATOR_VERBOSE "Enable instruction sequence logging" OFF)
+option(ILATOR_PROFILING "Enable instruction sequence logging and profiling" OFF)
+option(ILATOR_VERBOSE "Enable instruction state updates logging" OFF)
 option(JSON_SUPPORT "Build JSON parser support" OFF)
 
 find_package(SystemCLanguage CONFIG REQUIRED)
@@ -21,28 +22,18 @@ add_executable(sdp
   ${CMAKE_CURRENT_SOURCE_DIR}/src/idu_CVT_SCALE_group1.cc
   ${CMAKE_CURRENT_SOURCE_DIR}/src/idu_CVT_SHIFT_group0.cc
   ${CMAKE_CURRENT_SOURCE_DIR}/src/idu_CVT_SHIFT_group1.cc
-  ${CMAKE_CURRENT_SOURCE_DIR}/src/idu_Compute_Add_Lut_group0.cc
-  ${CMAKE_CURRENT_SOURCE_DIR}/src/idu_Compute_Add_Lut_group1.cc
   ${CMAKE_CURRENT_SOURCE_DIR}/src/idu_Compute_Add_group0.cc
   ${CMAKE_CURRENT_SOURCE_DIR}/src/idu_Compute_Add_group1.cc
   ${CMAKE_CURRENT_SOURCE_DIR}/src/idu_Compute_BatchNorm_group0.cc
   ${CMAKE_CURRENT_SOURCE_DIR}/src/idu_Compute_BatchNorm_group1.cc
   ${CMAKE_CURRENT_SOURCE_DIR}/src/idu_Compute_Equal_group0.cc
   ${CMAKE_CURRENT_SOURCE_DIR}/src/idu_Compute_Equal_group1.cc
-  ${CMAKE_CURRENT_SOURCE_DIR}/src/idu_Compute_Max_LUT_group0.cc
-  ${CMAKE_CURRENT_SOURCE_DIR}/src/idu_Compute_Max_LUT_group1.cc
   ${CMAKE_CURRENT_SOURCE_DIR}/src/idu_Compute_Max_group0.cc
   ${CMAKE_CURRENT_SOURCE_DIR}/src/idu_Compute_Max_group1.cc
-  ${CMAKE_CURRENT_SOURCE_DIR}/src/idu_Compute_Min_Lut_group0.cc
-  ${CMAKE_CURRENT_SOURCE_DIR}/src/idu_Compute_Min_Lut_group1.cc
   ${CMAKE_CURRENT_SOURCE_DIR}/src/idu_Compute_Min_group0.cc
   ${CMAKE_CURRENT_SOURCE_DIR}/src/idu_Compute_Min_group1.cc
-  ${CMAKE_CURRENT_SOURCE_DIR}/src/idu_Compute_Multiply_Lut_group0.cc
-  ${CMAKE_CURRENT_SOURCE_DIR}/src/idu_Compute_Multiply_Lut_group1.cc
   ${CMAKE_CURRENT_SOURCE_DIR}/src/idu_Compute_Multiply_group0.cc
   ${CMAKE_CURRENT_SOURCE_DIR}/src/idu_Compute_Multiply_group1.cc
-  ${CMAKE_CURRENT_SOURCE_DIR}/src/idu_Compute_PReLU_Lut_group0.cc
-  ${CMAKE_CURRENT_SOURCE_DIR}/src/idu_Compute_PReLU_Lut_group1.cc
   ${CMAKE_CURRENT_SOURCE_DIR}/src/idu_Compute_PReLU_group0.cc
   ${CMAKE_CURRENT_SOURCE_DIR}/src/idu_Compute_PReLU_group1.cc
   ${CMAKE_CURRENT_SOURCE_DIR}/src/idu_Compute_ReLU_group0.cc
@@ -113,35 +104,22 @@ add_executable(sdp
   ${CMAKE_CURRENT_SOURCE_DIR}/src/idu_DST_SURFACE_STRIDE_group1.cc
   ${CMAKE_CURRENT_SOURCE_DIR}/src/idu_FEATURE_MODE_CFG_group0.cc
   ${CMAKE_CURRENT_SOURCE_DIR}/src/idu_FEATURE_MODE_CFG_group1.cc
-  ${CMAKE_CURRENT_SOURCE_DIR}/src/idu_LUT_ACCESS_CFG.cc
-  ${CMAKE_CURRENT_SOURCE_DIR}/src/idu_LUT_ACCESS_DATA.cc
-  ${CMAKE_CURRENT_SOURCE_DIR}/src/idu_LUT_CFG.cc
-  ${CMAKE_CURRENT_SOURCE_DIR}/src/idu_LUT_INFO.cc
-  ${CMAKE_CURRENT_SOURCE_DIR}/src/idu_LUT_LE_END.cc
-  ${CMAKE_CURRENT_SOURCE_DIR}/src/idu_LUT_LE_SLOPE_SCALE.cc
-  ${CMAKE_CURRENT_SOURCE_DIR}/src/idu_LUT_LE_SLOPE_SHIFT.cc
-  ${CMAKE_CURRENT_SOURCE_DIR}/src/idu_LUT_LE_START.cc
-  ${CMAKE_CURRENT_SOURCE_DIR}/src/idu_LUT_LO_END.cc
-  ${CMAKE_CURRENT_SOURCE_DIR}/src/idu_LUT_LO_SLOPE_SCALE.cc
-  ${CMAKE_CURRENT_SOURCE_DIR}/src/idu_LUT_LO_SLOPE_SHIFT.cc
-  ${CMAKE_CURRENT_SOURCE_DIR}/src/idu_LUT_LO_START.cc
   ${CMAKE_CURRENT_SOURCE_DIR}/src/idu_OP_ENABLE_group0.cc
   ${CMAKE_CURRENT_SOURCE_DIR}/src/idu_OP_ENABLE_group1.cc
   ${CMAKE_CURRENT_SOURCE_DIR}/src/idu_PERF_ENABLE_group0.cc
   ${CMAKE_CURRENT_SOURCE_DIR}/src/idu_PERF_ENABLE_group1.cc
-  ${CMAKE_CURRENT_SOURCE_DIR}/src/idu_Read_LUT_group0.cc
-  ${CMAKE_CURRENT_SOURCE_DIR}/src/idu_Read_LUT_group1.cc
   ${CMAKE_CURRENT_SOURCE_DIR}/src/idu_SET_PRODUCER.cc
-  ${CMAKE_CURRENT_SOURCE_DIR}/src/idu_Write_LUT_le_tbl.cc
-  ${CMAKE_CURRENT_SOURCE_DIR}/src/idu_Write_LUT_lo_tbl.cc
   ${CMAKE_CURRENT_SOURCE_DIR}/src/memory_update_functions_0.cc
   ${CMAKE_CURRENT_SOURCE_DIR}/src/setup_initial_condition.cc
 )
 
 target_include_directories(sdp PRIVATE include)
 target_link_libraries(sdp SystemC::systemc)
+if(${ILATOR_PROFILING})
+  target_compile_definitions(sdp PRIVATE ILATOR_PROFILING)
+endif()
 if(${ILATOR_VERBOSE})
-  target_compile_definitions(sdp PRIVATE ILATOR_VERBOSE)
+  target_compile_definitions(sdp PRIVATE ILATOR_PROFILING ILATOR_VERBOSE)
 endif()
 if(${JSON_SUPPORT})
   include(FetchContent)

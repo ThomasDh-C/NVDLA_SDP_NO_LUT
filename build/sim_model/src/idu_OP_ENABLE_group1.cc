@@ -19,8 +19,8 @@ auto local_var_21 = sdp_group1_d_op_en.range(0, 0);
 sc_biguint<1> local_var_22 = 0;
 bool local_var_23 = (local_var_21 == local_var_22);
 bool local_var_24 = (local_var_19 & local_var_23);
-auto& univ_var_15 = local_var_24;
-return univ_var_15;
+auto& univ_var_3 = local_var_24;
+return univ_var_3;
 }
 void sdp::update_sdp_OP_ENABLE_group1() {
 auto local_var_1 = sdp_csb_data.range(0, 0);

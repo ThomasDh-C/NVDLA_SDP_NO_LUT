@@ -1,5 +1,6 @@
 #include <iomanip>
 #include <sdp.h>
+#include <chrono>
 static int instr_cntr = 0;
 int sdp::GetInstrCntr() {
   return instr_cntr;
@@ -7,9 +8,10 @@ int sdp::GetInstrCntr() {
 void sdp::IncrementInstrCntr() {
   instr_cntr++;
 }
-void sdp::LogInstrSequence(const std::string& instr_name) {
-  instr_log << "Instr No." << std::setw(5) << GetInstrCntr() << '\t';
-  instr_log << instr_name << " is activated\n";
+void sdp::LogInstrSequence(const std::string& instr_name, const long int& exec_time) {
+  instr_log << "Instr No. " << std::setw(8) << GetInstrCntr() << '\t';
+  instr_log << instr_name << " is activated\t";
+  instr_log << "exec_time: " << exec_time * 1e-3 << " us\n";
   IncrementInstrCntr();
 }
 static bool g_initialized = false;
@@ -122,717 +124,1119 @@ sdp_regs_data_mult_15 = sdp_regs_data_mult_15_in.read();
 sdp_dma_data_alu_15 = sdp_dma_data_alu_15_in.read();
 sdp_dma_data_mult_15 = sdp_dma_data_mult_15_in.read();
 if (valid_sdp() && decode_sdp_SET_PRODUCER()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_SET_PRODUCER();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("SET_PRODUCER");
-#endif
-}
-if (valid_sdp() && decode_sdp_LUT_ACCESS_CFG()) {
-  update_sdp_LUT_ACCESS_CFG();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("LUT_ACCESS_CFG");
-#endif
-}
-if (valid_sdp() && decode_sdp_LUT_ACCESS_DATA()) {
-  update_sdp_LUT_ACCESS_DATA();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("LUT_ACCESS_DATA");
-#endif
-}
-if (valid_sdp() && decode_sdp_LUT_CFG()) {
-  update_sdp_LUT_CFG();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("LUT_CFG");
-#endif
-}
-if (valid_sdp() && decode_sdp_LUT_INFO()) {
-  update_sdp_LUT_INFO();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("LUT_INFO");
-#endif
-}
-if (valid_sdp() && decode_sdp_LUT_LE_START()) {
-  update_sdp_LUT_LE_START();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("LUT_LE_START");
-#endif
-}
-if (valid_sdp() && decode_sdp_LUT_LE_END()) {
-  update_sdp_LUT_LE_END();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("LUT_LE_END");
-#endif
-}
-if (valid_sdp() && decode_sdp_LUT_LO_START()) {
-  update_sdp_LUT_LO_START();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("LUT_LO_START");
-#endif
-}
-if (valid_sdp() && decode_sdp_LUT_LO_END()) {
-  update_sdp_LUT_LO_END();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("LUT_LO_END");
-#endif
-}
-if (valid_sdp() && decode_sdp_LUT_LE_SLOPE_SCALE()) {
-  update_sdp_LUT_LE_SLOPE_SCALE();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("LUT_LE_SLOPE_SCALE");
-#endif
-}
-if (valid_sdp() && decode_sdp_LUT_LE_SLOPE_SHIFT()) {
-  update_sdp_LUT_LE_SLOPE_SHIFT();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("LUT_LE_SLOPE_SHIFT");
-#endif
-}
-if (valid_sdp() && decode_sdp_LUT_LO_SLOPE_SCALE()) {
-  update_sdp_LUT_LO_SLOPE_SCALE();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("LUT_LO_SLOPE_SCALE");
-#endif
-}
-if (valid_sdp() && decode_sdp_LUT_LO_SLOPE_SHIFT()) {
-  update_sdp_LUT_LO_SLOPE_SHIFT();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("LUT_LO_SLOPE_SHIFT");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("SET_PRODUCER", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_OP_ENABLE_group0()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_OP_ENABLE_group0();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("OP_ENABLE_group0");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("OP_ENABLE_group0", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_OP_ENABLE_group1()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_OP_ENABLE_group1();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("OP_ENABLE_group1");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("OP_ENABLE_group1", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_DATA_CUBE_WIDTH_group0()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_DATA_CUBE_WIDTH_group0();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("DATA_CUBE_WIDTH_group0");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("DATA_CUBE_WIDTH_group0", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_DATA_CUBE_WIDTH_group1()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_DATA_CUBE_WIDTH_group1();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("DATA_CUBE_WIDTH_group1");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("DATA_CUBE_WIDTH_group1", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_DATA_CUBE_HEIGHT_group0()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_DATA_CUBE_HEIGHT_group0();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("DATA_CUBE_HEIGHT_group0");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("DATA_CUBE_HEIGHT_group0", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_DATA_CUBE_HEIGHT_group1()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_DATA_CUBE_HEIGHT_group1();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("DATA_CUBE_HEIGHT_group1");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("DATA_CUBE_HEIGHT_group1", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_DATA_CUBE_CHANNEL_group0()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_DATA_CUBE_CHANNEL_group0();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("DATA_CUBE_CHANNEL_group0");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("DATA_CUBE_CHANNEL_group0", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_DATA_CUBE_CHANNEL_group1()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_DATA_CUBE_CHANNEL_group1();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("DATA_CUBE_CHANNEL_group1");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("DATA_CUBE_CHANNEL_group1", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_DST_BASE_ADDR_LOW_group0()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_DST_BASE_ADDR_LOW_group0();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("DST_BASE_ADDR_LOW_group0");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("DST_BASE_ADDR_LOW_group0", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_DST_BASE_ADDR_LOW_group1()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_DST_BASE_ADDR_LOW_group1();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("DST_BASE_ADDR_LOW_group1");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("DST_BASE_ADDR_LOW_group1", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_DST_BASE_ADDR_HIGH_group0()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_DST_BASE_ADDR_HIGH_group0();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("DST_BASE_ADDR_HIGH_group0");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("DST_BASE_ADDR_HIGH_group0", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_DST_BASE_ADDR_HIGH_group1()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_DST_BASE_ADDR_HIGH_group1();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("DST_BASE_ADDR_HIGH_group1");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("DST_BASE_ADDR_HIGH_group1", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_DST_LINE_STRIDE_group0()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_DST_LINE_STRIDE_group0();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("DST_LINE_STRIDE_group0");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("DST_LINE_STRIDE_group0", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_DST_LINE_STRIDE_group1()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_DST_LINE_STRIDE_group1();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("DST_LINE_STRIDE_group1");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("DST_LINE_STRIDE_group1", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_DST_SURFACE_STRIDE_group0()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_DST_SURFACE_STRIDE_group0();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("DST_SURFACE_STRIDE_group0");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("DST_SURFACE_STRIDE_group0", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_DST_SURFACE_STRIDE_group1()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_DST_SURFACE_STRIDE_group1();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("DST_SURFACE_STRIDE_group1");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("DST_SURFACE_STRIDE_group1", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_DP_BS_CFG_group0()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_DP_BS_CFG_group0();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("DP_BS_CFG_group0");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("DP_BS_CFG_group0", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_DP_BS_CFG_group1()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_DP_BS_CFG_group1();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("DP_BS_CFG_group1");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("DP_BS_CFG_group1", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_DP_BS_ALU_CFG_group0()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_DP_BS_ALU_CFG_group0();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("DP_BS_ALU_CFG_group0");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("DP_BS_ALU_CFG_group0", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_DP_BS_ALU_CFG_group1()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_DP_BS_ALU_CFG_group1();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("DP_BS_ALU_CFG_group1");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("DP_BS_ALU_CFG_group1", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_DP_BS_ALU_SRC_VALUE_group0()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_DP_BS_ALU_SRC_VALUE_group0();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("DP_BS_ALU_SRC_VALUE_group0");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("DP_BS_ALU_SRC_VALUE_group0", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_DP_BS_ALU_SRC_VALUE_group1()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_DP_BS_ALU_SRC_VALUE_group1();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("DP_BS_ALU_SRC_VALUE_group1");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("DP_BS_ALU_SRC_VALUE_group1", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_DP_BS_MUL_CFG_group0()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_DP_BS_MUL_CFG_group0();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("DP_BS_MUL_CFG_group0");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("DP_BS_MUL_CFG_group0", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_DP_BS_MUL_CFG_group1()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_DP_BS_MUL_CFG_group1();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("DP_BS_MUL_CFG_group1");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("DP_BS_MUL_CFG_group1", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_DP_BS_MUL_SRC_VALUE_group0()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_DP_BS_MUL_SRC_VALUE_group0();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("DP_BS_MUL_SRC_VALUE_group0");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("DP_BS_MUL_SRC_VALUE_group0", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_DP_BS_MUL_SRC_VALUE_group1()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_DP_BS_MUL_SRC_VALUE_group1();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("DP_BS_MUL_SRC_VALUE_group1");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("DP_BS_MUL_SRC_VALUE_group1", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_DP_BN_CFG_group0()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_DP_BN_CFG_group0();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("DP_BN_CFG_group0");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("DP_BN_CFG_group0", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_DP_BN_CFG_group1()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_DP_BN_CFG_group1();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("DP_BN_CFG_group1");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("DP_BN_CFG_group1", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_DP_BN_ALU_CFG_group0()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_DP_BN_ALU_CFG_group0();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("DP_BN_ALU_CFG_group0");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("DP_BN_ALU_CFG_group0", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_DP_BN_ALU_CFG_group1()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_DP_BN_ALU_CFG_group1();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("DP_BN_ALU_CFG_group1");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("DP_BN_ALU_CFG_group1", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_DP_BN_ALU_SRC_VALUE_group0()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_DP_BN_ALU_SRC_VALUE_group0();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("DP_BN_ALU_SRC_VALUE_group0");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("DP_BN_ALU_SRC_VALUE_group0", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_DP_BN_ALU_SRC_VALUE_group1()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_DP_BN_ALU_SRC_VALUE_group1();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("DP_BN_ALU_SRC_VALUE_group1");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("DP_BN_ALU_SRC_VALUE_group1", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_DP_BN_MUL_CFG_group0()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_DP_BN_MUL_CFG_group0();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("DP_BN_MUL_CFG_group0");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("DP_BN_MUL_CFG_group0", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_DP_BN_MUL_CFG_group1()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_DP_BN_MUL_CFG_group1();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("DP_BN_MUL_CFG_group1");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("DP_BN_MUL_CFG_group1", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_DP_BN_MUL_SRC_VALUE_group0()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_DP_BN_MUL_SRC_VALUE_group0();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("DP_BN_MUL_SRC_VALUE_group0");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("DP_BN_MUL_SRC_VALUE_group0", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_DP_BN_MUL_SRC_VALUE_group1()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_DP_BN_MUL_SRC_VALUE_group1();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("DP_BN_MUL_SRC_VALUE_group1");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("DP_BN_MUL_SRC_VALUE_group1", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_DP_EW_CFG_group0()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_DP_EW_CFG_group0();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("DP_EW_CFG_group0");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("DP_EW_CFG_group0", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_DP_EW_CFG_group1()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_DP_EW_CFG_group1();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("DP_EW_CFG_group1");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("DP_EW_CFG_group1", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_DP_EW_ALU_CFG_group0()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_DP_EW_ALU_CFG_group0();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("DP_EW_ALU_CFG_group0");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("DP_EW_ALU_CFG_group0", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_DP_EW_ALU_CFG_group1()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_DP_EW_ALU_CFG_group1();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("DP_EW_ALU_CFG_group1");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("DP_EW_ALU_CFG_group1", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_DP_EW_ALU_SRC_VALUE_group0()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_DP_EW_ALU_SRC_VALUE_group0();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("DP_EW_ALU_SRC_VALUE_group0");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("DP_EW_ALU_SRC_VALUE_group0", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_DP_EW_ALU_CVT_OFFSET_VALUE_group0()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_DP_EW_ALU_CVT_OFFSET_VALUE_group0();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("DP_EW_ALU_CVT_OFFSET_VALUE_group0");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("DP_EW_ALU_CVT_OFFSET_VALUE_group0", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_DP_EW_ALU_CVT_OFFSET_VALUE_group1()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_DP_EW_ALU_CVT_OFFSET_VALUE_group1();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("DP_EW_ALU_CVT_OFFSET_VALUE_group1");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("DP_EW_ALU_CVT_OFFSET_VALUE_group1", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_DP_EW_ALU_CVT_SCALE_VALUE_group0()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_DP_EW_ALU_CVT_SCALE_VALUE_group0();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("DP_EW_ALU_CVT_SCALE_VALUE_group0");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("DP_EW_ALU_CVT_SCALE_VALUE_group0", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_DP_EW_ALU_CVT_SCALE_VALUE_group1()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_DP_EW_ALU_CVT_SCALE_VALUE_group1();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("DP_EW_ALU_CVT_SCALE_VALUE_group1");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("DP_EW_ALU_CVT_SCALE_VALUE_group1", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_DP_EW_ALU_CVT_TRUNCATE_VALUE_group0()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_DP_EW_ALU_CVT_TRUNCATE_VALUE_group0();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("DP_EW_ALU_CVT_TRUNCATE_VALUE_group0");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("DP_EW_ALU_CVT_TRUNCATE_VALUE_group0", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_DP_EW_ALU_CVT_TRUNCATE_VALUE_group1()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_DP_EW_ALU_CVT_TRUNCATE_VALUE_group1();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("DP_EW_ALU_CVT_TRUNCATE_VALUE_group1");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("DP_EW_ALU_CVT_TRUNCATE_VALUE_group1", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_DP_EW_MUL_CFG_group0()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_DP_EW_MUL_CFG_group0();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("DP_EW_MUL_CFG_group0");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("DP_EW_MUL_CFG_group0", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_DP_EW_MUL_CFG_group1()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_DP_EW_MUL_CFG_group1();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("DP_EW_MUL_CFG_group1");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("DP_EW_MUL_CFG_group1", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_DP_EW_MUL_SRC_VALUE_group0()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_DP_EW_MUL_SRC_VALUE_group0();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("DP_EW_MUL_SRC_VALUE_group0");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("DP_EW_MUL_SRC_VALUE_group0", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_DP_EW_MUL_SRC_VALUE_group1()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_DP_EW_MUL_SRC_VALUE_group1();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("DP_EW_MUL_SRC_VALUE_group1");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("DP_EW_MUL_SRC_VALUE_group1", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_DP_EW_MUL_CVT_OFFSET_VALUE_group0()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_DP_EW_MUL_CVT_OFFSET_VALUE_group0();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("DP_EW_MUL_CVT_OFFSET_VALUE_group0");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("DP_EW_MUL_CVT_OFFSET_VALUE_group0", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_DP_EW_MUL_CVT_OFFSET_VALUE_group1()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_DP_EW_MUL_CVT_OFFSET_VALUE_group1();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("DP_EW_MUL_CVT_OFFSET_VALUE_group1");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("DP_EW_MUL_CVT_OFFSET_VALUE_group1", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_DP_EW_MUL_CVT_SCALE_VALUE_group0()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_DP_EW_MUL_CVT_SCALE_VALUE_group0();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("DP_EW_MUL_CVT_SCALE_VALUE_group0");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("DP_EW_MUL_CVT_SCALE_VALUE_group0", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_DP_EW_MUL_CVT_SCALE_VALUE_group1()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_DP_EW_MUL_CVT_SCALE_VALUE_group1();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("DP_EW_MUL_CVT_SCALE_VALUE_group1");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("DP_EW_MUL_CVT_SCALE_VALUE_group1", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_DP_EW_MUL_CVT_TRUNCATE_VALUE_group0()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_DP_EW_MUL_CVT_TRUNCATE_VALUE_group0();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("DP_EW_MUL_CVT_TRUNCATE_VALUE_group0");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("DP_EW_MUL_CVT_TRUNCATE_VALUE_group0", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_DP_EW_MUL_CVT_TRUNCATE_VALUE_group1()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_DP_EW_MUL_CVT_TRUNCATE_VALUE_group1();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("DP_EW_MUL_CVT_TRUNCATE_VALUE_group1");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("DP_EW_MUL_CVT_TRUNCATE_VALUE_group1", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_DP_EW_TRUNCATE_VALUE_group0()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_DP_EW_TRUNCATE_VALUE_group0();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("DP_EW_TRUNCATE_VALUE_group0");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("DP_EW_TRUNCATE_VALUE_group0", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_DP_EW_TRUNCATE_VALUE_group1()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_DP_EW_TRUNCATE_VALUE_group1();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("DP_EW_TRUNCATE_VALUE_group1");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("DP_EW_TRUNCATE_VALUE_group1", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_FEATURE_MODE_CFG_group0()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_FEATURE_MODE_CFG_group0();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("FEATURE_MODE_CFG_group0");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("FEATURE_MODE_CFG_group0", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_FEATURE_MODE_CFG_group1()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_FEATURE_MODE_CFG_group1();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("FEATURE_MODE_CFG_group1");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("FEATURE_MODE_CFG_group1", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_DST_DMA_CFG_group0()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_DST_DMA_CFG_group0();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("DST_DMA_CFG_group0");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("DST_DMA_CFG_group0", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_DST_DMA_CFG_group1()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_DST_DMA_CFG_group1();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("DST_DMA_CFG_group1");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("DST_DMA_CFG_group1", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_DST_BATCH_STRIDE_group0()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_DST_BATCH_STRIDE_group0();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("DST_BATCH_STRIDE_group0");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("DST_BATCH_STRIDE_group0", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_DST_BATCH_STRIDE_group1()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_DST_BATCH_STRIDE_group1();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("DST_BATCH_STRIDE_group1");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("DST_BATCH_STRIDE_group1", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_DATA_FORMAT_group0()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_DATA_FORMAT_group0();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("DATA_FORMAT_group0");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("DATA_FORMAT_group0", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_DATA_FORMAT_group1()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_DATA_FORMAT_group1();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("DATA_FORMAT_group1");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("DATA_FORMAT_group1", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_CVT_OFFSET_group0()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_CVT_OFFSET_group0();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("CVT_OFFSET_group0");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("CVT_OFFSET_group0", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_CVT_OFFSET_group1()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_CVT_OFFSET_group1();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("CVT_OFFSET_group1");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("CVT_OFFSET_group1", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_CVT_SCALE_group0()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_CVT_SCALE_group0();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("CVT_SCALE_group0");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("CVT_SCALE_group0", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_CVT_SCALE_group1()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_CVT_SCALE_group1();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("CVT_SCALE_group1");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("CVT_SCALE_group1", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_CVT_SHIFT_group0()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_CVT_SHIFT_group0();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("CVT_SHIFT_group0");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("CVT_SHIFT_group0", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_CVT_SHIFT_group1()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_CVT_SHIFT_group1();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("CVT_SHIFT_group1");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("CVT_SHIFT_group1", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_PERF_ENABLE_group0()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_PERF_ENABLE_group0();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("PERF_ENABLE_group0");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("PERF_ENABLE_group0", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_PERF_ENABLE_group1()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_PERF_ENABLE_group1();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("PERF_ENABLE_group1");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("PERF_ENABLE_group1", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_DONE()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_DONE();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("DONE");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("DONE", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_Compute_ReLU_group0()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_Compute_ReLU_group0();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("Compute_ReLU_group0");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("Compute_ReLU_group0", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_Compute_ReLU_group1()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_Compute_ReLU_group1();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("Compute_ReLU_group1");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("Compute_ReLU_group1", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_Compute_Max_group0()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_Compute_Max_group0();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("Compute_Max_group0");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("Compute_Max_group0", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_Compute_Max_group1()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_Compute_Max_group1();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("Compute_Max_group1");
-#endif
-}
-if (valid_sdp() && decode_sdp_Compute_Max_LUT_group0()) {
-  update_sdp_Compute_Max_LUT_group0();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("Compute_Max_LUT_group0");
-#endif
-}
-if (valid_sdp() && decode_sdp_Compute_Max_LUT_group1()) {
-  update_sdp_Compute_Max_LUT_group1();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("Compute_Max_LUT_group1");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("Compute_Max_group1", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_Compute_Min_group0()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_Compute_Min_group0();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("Compute_Min_group0");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("Compute_Min_group0", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_Compute_Min_group1()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_Compute_Min_group1();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("Compute_Min_group1");
-#endif
-}
-if (valid_sdp() && decode_sdp_Compute_Min_Lut_group0()) {
-  update_sdp_Compute_Min_Lut_group0();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("Compute_Min_Lut_group0");
-#endif
-}
-if (valid_sdp() && decode_sdp_Compute_Min_Lut_group1()) {
-  update_sdp_Compute_Min_Lut_group1();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("Compute_Min_Lut_group1");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("Compute_Min_group1", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_Compute_Add_group0()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_Compute_Add_group0();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("Compute_Add_group0");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("Compute_Add_group0", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_Compute_Add_group1()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_Compute_Add_group1();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("Compute_Add_group1");
-#endif
-}
-if (valid_sdp() && decode_sdp_Compute_Add_Lut_group0()) {
-  update_sdp_Compute_Add_Lut_group0();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("Compute_Add_Lut_group0");
-#endif
-}
-if (valid_sdp() && decode_sdp_Compute_Add_Lut_group1()) {
-  update_sdp_Compute_Add_Lut_group1();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("Compute_Add_Lut_group1");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("Compute_Add_group1", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_Compute_Equal_group0()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_Compute_Equal_group0();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("Compute_Equal_group0");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("Compute_Equal_group0", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_Compute_Equal_group1()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_Compute_Equal_group1();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("Compute_Equal_group1");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("Compute_Equal_group1", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_Compute_Multiply_group0()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_Compute_Multiply_group0();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("Compute_Multiply_group0");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("Compute_Multiply_group0", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_Compute_Multiply_group1()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_Compute_Multiply_group1();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("Compute_Multiply_group1");
-#endif
-}
-if (valid_sdp() && decode_sdp_Compute_Multiply_Lut_group0()) {
-  update_sdp_Compute_Multiply_Lut_group0();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("Compute_Multiply_Lut_group0");
-#endif
-}
-if (valid_sdp() && decode_sdp_Compute_Multiply_Lut_group1()) {
-  update_sdp_Compute_Multiply_Lut_group1();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("Compute_Multiply_Lut_group1");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("Compute_Multiply_group1", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_Compute_PReLU_group0()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_Compute_PReLU_group0();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("Compute_PReLU_group0");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("Compute_PReLU_group0", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_Compute_PReLU_group1()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_Compute_PReLU_group1();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("Compute_PReLU_group1");
-#endif
-}
-if (valid_sdp() && decode_sdp_Compute_PReLU_Lut_group0()) {
-  update_sdp_Compute_PReLU_Lut_group0();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("Compute_PReLU_Lut_group0");
-#endif
-}
-if (valid_sdp() && decode_sdp_Compute_PReLU_Lut_group1()) {
-  update_sdp_Compute_PReLU_Lut_group1();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("Compute_PReLU_Lut_group1");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("Compute_PReLU_group1", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_Compute_BatchNorm_group0()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_Compute_BatchNorm_group0();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("Compute_BatchNorm_group0");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("Compute_BatchNorm_group0", exec_time);
 #endif
 }
 if (valid_sdp() && decode_sdp_Compute_BatchNorm_group1()) {
+#ifdef ILATOR_PROFILING
+  auto start = std::chrono::high_resolution_clock::now();
+#endif
   update_sdp_Compute_BatchNorm_group1();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("Compute_BatchNorm_group1");
-#endif
-}
-if (valid_sdp() && decode_sdp_Write_LUT_le_tbl()) {
-  update_sdp_Write_LUT_le_tbl();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("Write_LUT_le_tbl");
-#endif
-}
-if (valid_sdp() && decode_sdp_Write_LUT_lo_tbl()) {
-  update_sdp_Write_LUT_lo_tbl();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("Write_LUT_lo_tbl");
-#endif
-}
-if (valid_sdp() && decode_sdp_Read_LUT_group0()) {
-  update_sdp_Read_LUT_group0();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("Read_LUT_group0");
-#endif
-}
-if (valid_sdp() && decode_sdp_Read_LUT_group1()) {
-  update_sdp_Read_LUT_group1();
-  #ifdef ILATOR_VERBOSE
-  LogInstrSequence("Read_LUT_group1");
+  
+#ifdef ILATOR_PROFILING
+  auto stop = std::chrono::high_resolution_clock::now();
+  auto exec_time = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+  LogInstrSequence("Compute_BatchNorm_group1", exec_time);
 #endif
 }
 while (1) {

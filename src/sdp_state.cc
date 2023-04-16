@@ -32,6 +32,12 @@ namespace ilang {
 
 // Define SDP states
 void DefineSDPState(Ila& m) {
+    // temp vars
+
+    for (auto i = 0; i < 16; i++) {
+        m.NewBvState("output_shifted_" + (std::to_string(i)), 32);
+    }
+
     // Config Registers
 
     // b000 done

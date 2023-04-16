@@ -11,7 +11,7 @@ project(nvdla VERSION 0.1 LANGUAGES CXX)
 # alias and configurations
 # ---------------------------------------------------------------------------- #
 #set(CMAKE_CXX_COMPILER "g++-9")
-set(CMAKE_PREFIX_PATH /u/djacob/ILAng /u/djacob/z3)
+# set(CMAKE_PREFIX_PATH /u/djacob/ILAng /u/djacob/z3)
 set(MyTarget ${PROJECT_NAME})
 
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
@@ -31,7 +31,6 @@ find_package(ilang REQUIRED 1.1.0)
 add_library(${MyTarget}ila
   src/datapath/components.cc
   src/datapath/converters.cc
-  src/datapath/lut.cc
   src/sdp_input.cc
   src/sdp_output.cc
   src/sdp_state.cc

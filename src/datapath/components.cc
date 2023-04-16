@@ -123,10 +123,12 @@ ExprRef SignedGreater(ExprRef a, ExprRef b, size_t length) {
 
 // Extend a signed number
 ExprRef SignExtend(ExprRef input, size_t input_length, size_t output_length) {
-    auto is_positive = SignedGreater(input, BvConst(0, input_length), input_length);
+    // FIX = commenting out below
+    // auto is_positive = SignedGreater(input, BvConst(0, input_length), input_length);
 
     // Sign extend by padding to the left with sign bit.
-    auto output = Ite(is_positive == 0x1, 
+    // FIXED HERE
+    auto output = Ite(SelectBit(input, input_length - 1) == 0x0, 
         Concat(BvConst(0, output_length - input_length), input),
         Concat(AllOnes(output_length - input_length), input)
     );

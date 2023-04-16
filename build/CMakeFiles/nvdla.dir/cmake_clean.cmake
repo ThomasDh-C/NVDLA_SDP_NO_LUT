@@ -1,6 +1,5 @@
 file(REMOVE_RECURSE
   "CMakeFiles/nvdla.dir/app/main.cc.o"
-  "CMakeFiles/nvdla.dir/app/main.cc.o.d"
   "nvdla"
   "nvdla.pdb"
 )

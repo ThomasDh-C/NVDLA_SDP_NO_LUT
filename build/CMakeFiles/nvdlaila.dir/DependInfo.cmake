@@ -1,22 +1,31 @@
-
-# Consider dependencies only in project.
-set(CMAKE_DEPENDS_IN_PROJECT_ONLY OFF)
-
 # The set of languages for which implicit dependencies are needed:
 set(CMAKE_DEPENDS_LANGUAGES
+  "CXX"
+  )
+# The set of files for implicit dependencies of each language:
+set(CMAKE_DEPENDS_CHECK_CXX
+  "/root/existing_sdp_ila_custom/src/datapath/components.cc" "/root/existing_sdp_ila_custom/build/CMakeFiles/nvdlaila.dir/src/datapath/components.cc.o"
+  "/root/existing_sdp_ila_custom/src/datapath/converters.cc" "/root/existing_sdp_ila_custom/build/CMakeFiles/nvdlaila.dir/src/datapath/converters.cc.o"
+  "/root/existing_sdp_ila_custom/src/sdp_dp_instrs.cc" "/root/existing_sdp_ila_custom/build/CMakeFiles/nvdlaila.dir/src/sdp_dp_instrs.cc.o"
+  "/root/existing_sdp_ila_custom/src/sdp_input.cc" "/root/existing_sdp_ila_custom/build/CMakeFiles/nvdlaila.dir/src/sdp_input.cc.o"
+  "/root/existing_sdp_ila_custom/src/sdp_instrs.cc" "/root/existing_sdp_ila_custom/build/CMakeFiles/nvdlaila.dir/src/sdp_instrs.cc.o"
+  "/root/existing_sdp_ila_custom/src/sdp_output.cc" "/root/existing_sdp_ila_custom/build/CMakeFiles/nvdlaila.dir/src/sdp_output.cc.o"
+  "/root/existing_sdp_ila_custom/src/sdp_state.cc" "/root/existing_sdp_ila_custom/build/CMakeFiles/nvdlaila.dir/src/sdp_state.cc.o"
+  "/root/existing_sdp_ila_custom/src/sdp_top.cc" "/root/existing_sdp_ila_custom/build/CMakeFiles/nvdlaila.dir/src/sdp_top.cc.o"
+  )
+set(CMAKE_CXX_COMPILER_ID "GNU")
+
+# Preprocessor definitions for this target.
+set(CMAKE_TARGET_DEFINITIONS_CXX
+  "FMT_LOCALE"
+  "FMT_SHARED"
+  "GOOGLE_GLOG_DLL_DECL="
+  "GOOGLE_GLOG_DLL_DECL_FOR_UNITTESTS="
   )
 
-# The set of dependency files which are needed:
-set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/u/djacob/Workspace/NVDLA_SDP/src/datapath/components.cc" "CMakeFiles/nvdlaila.dir/src/datapath/components.cc.o" "gcc" "CMakeFiles/nvdlaila.dir/src/datapath/components.cc.o.d"
-  "/u/djacob/Workspace/NVDLA_SDP/src/datapath/converters.cc" "CMakeFiles/nvdlaila.dir/src/datapath/converters.cc.o" "gcc" "CMakeFiles/nvdlaila.dir/src/datapath/converters.cc.o.d"
-  "/u/djacob/Workspace/NVDLA_SDP/src/datapath/lut.cc" "CMakeFiles/nvdlaila.dir/src/datapath/lut.cc.o" "gcc" "CMakeFiles/nvdlaila.dir/src/datapath/lut.cc.o.d"
-  "/u/djacob/Workspace/NVDLA_SDP/src/sdp_dp_instrs.cc" "CMakeFiles/nvdlaila.dir/src/sdp_dp_instrs.cc.o" "gcc" "CMakeFiles/nvdlaila.dir/src/sdp_dp_instrs.cc.o.d"
-  "/u/djacob/Workspace/NVDLA_SDP/src/sdp_input.cc" "CMakeFiles/nvdlaila.dir/src/sdp_input.cc.o" "gcc" "CMakeFiles/nvdlaila.dir/src/sdp_input.cc.o.d"
-  "/u/djacob/Workspace/NVDLA_SDP/src/sdp_instrs.cc" "CMakeFiles/nvdlaila.dir/src/sdp_instrs.cc.o" "gcc" "CMakeFiles/nvdlaila.dir/src/sdp_instrs.cc.o.d"
-  "/u/djacob/Workspace/NVDLA_SDP/src/sdp_output.cc" "CMakeFiles/nvdlaila.dir/src/sdp_output.cc.o" "gcc" "CMakeFiles/nvdlaila.dir/src/sdp_output.cc.o.d"
-  "/u/djacob/Workspace/NVDLA_SDP/src/sdp_state.cc" "CMakeFiles/nvdlaila.dir/src/sdp_state.cc.o" "gcc" "CMakeFiles/nvdlaila.dir/src/sdp_state.cc.o.d"
-  "/u/djacob/Workspace/NVDLA_SDP/src/sdp_top.cc" "CMakeFiles/nvdlaila.dir/src/sdp_top.cc.o" "gcc" "CMakeFiles/nvdlaila.dir/src/sdp_top.cc.o.d"
+# The include file search paths:
+set(CMAKE_CXX_TARGET_INCLUDE_PATH
+  "../include"
   )
 
 # Targets to which this target links.

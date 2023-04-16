@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/sdp.h
+string
+-
+ilang/ilang++.h
+-
+sdp_config.h
+-
+
+../include/sdp_config.h
+
+/root/existing_sdp_ila_custom/app/main.cc
+sdp.h
+-
+ilang/ilang++.h
+-
+ilang/util/log.h
+-
+iostream
+-
+
